@@ -64,6 +64,7 @@ type APS struct {
 	URLArgs          []string
 	Category         string // requires iOS 8+
 	AccountId        string // for email push notifications
+	ShowInDialog     int
 }
 
 func (aps APS) MarshalJSON() ([]byte, error) {
@@ -93,6 +94,9 @@ func (aps APS) MarshalJSON() ([]byte, error) {
 	}
 	if aps.AccountId != "" {
 		data["account-id"] = aps.AccountId
+	}
+	if aps.ShowInDialog != 0 {
+		data["show_in_dialog"] = aps.ShowInDialog
 	}
 
 	return json.Marshal(data)
